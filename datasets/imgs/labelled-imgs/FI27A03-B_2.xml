@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Pieces_Jan23</folder>
+ <filename>FI27A03-B_2.jpg</filename>
+ <path>D:\Luke Files\Ciencia\Produção Científica\PhD Thesis\Exp. 01 - Trap Photos\04. Finais Anotadas\For training\Pieces_Jan23\FI27A03-B_2.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>238</width>
+  <height>234</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Orthoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>83</xmin>
+   <ymin>106</ymin>
+   <xmax>134</xmax>
+   <ymax>144</ymax>
+  </bndbox>
+ </object>
+</annotation>

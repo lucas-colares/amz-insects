@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>MI28A02-A_10.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/MI28A02-A_10.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>397</width>
+  <height>397</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Hymenoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>297</xmax>
+   <ymax>297</ymax>
+  </bndbox>
+ </object>
+</annotation>

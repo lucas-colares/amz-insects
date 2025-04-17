@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>TF02A07-A_22.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/TF02A07-A_22.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>288</width>
+  <height>342</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Hemiptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>188</xmax>
+   <ymax>242</ymax>
+  </bndbox>
+ </object>
+</annotation>

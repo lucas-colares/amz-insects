@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Pieces_Jan23</folder>
+ <filename>MI24A02-A_1.jpg</filename>
+ <path>D:\Luke Files\Ciencia\Produção Científica\PhD Thesis\Exp. 01 - Trap Photos\04. Finais Anotadas\For training\Pieces_Jan23\MI24A02-A_1.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>398</width>
+  <height>331</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Hymenoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>250</xmin>
+   <ymin>100</ymin>
+   <xmax>298</xmax>
+   <ymax>187</ymax>
+  </bndbox>
+ </object>
+</annotation>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>AI01A01-B_37.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/AI01A01-B_37.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>418</width>
+  <height>321</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Brachycera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>166</ymin>
+   <xmax>137</xmax>
+   <ymax>211</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Ephemeroptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>239</xmin>
+   <ymin>100</ymin>
+   <xmax>318</xmax>
+   <ymax>221</ymax>
+  </bndbox>
+ </object>
+</annotation>

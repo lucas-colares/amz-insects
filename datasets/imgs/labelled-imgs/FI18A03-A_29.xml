@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>FI18A03-A_29.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/FI18A03-A_29.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>376</width>
+  <height>306</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Nematocera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>185</xmin>
+   <ymin>100</ymin>
+   <xmax>276</xmax>
+   <ymax>206</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Brachycera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>141</ymin>
+   <xmax>129</xmax>
+   <ymax>168</ymax>
+  </bndbox>
+ </object>
+</annotation>

@@ -1,0 +1,6 @@
+train: "E:/Luke Files/Ciencia/Papers/The one about arthropods and habitat loss - Colares et al. (2023)/amz-insects/datasets/DL-fold/1-fold/train/images"
+val: "E:/Luke Files/Ciencia/Papers/The one about arthropods and habitat loss - Colares et al. (2023)/amz-insects/datasets/DL-fold/1-fold/val/images"
+test: "E:/Luke Files/Ciencia/Papers/The one about arthropods and habitat loss - Colares et al. (2023)/amz-insects/datasets/DL-fold/1-fold/test/images"
+
+nc: 13
+names: ['Araneae', 'Brachycera', 'Coleoptera', 'Ephemeroptera', 'Hemiptera', 'Hymenoptera', 'Isoptera', 'Lepidoptera', 'Nematocera', 'Odonata', 'Orthoptera', 'Plecoptera', 'Trichoptera']

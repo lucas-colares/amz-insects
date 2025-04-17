@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>FI08A02-A_4.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/FI08A02-A_4.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>471</width>
+  <height>425</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Hemiptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>303</xmin>
+   <ymin>100</ymin>
+   <xmax>371</xmax>
+   <ymax>189</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Hymenoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>241</ymin>
+   <xmax>186</xmax>
+   <ymax>325</ymax>
+  </bndbox>
+ </object>
+</annotation>

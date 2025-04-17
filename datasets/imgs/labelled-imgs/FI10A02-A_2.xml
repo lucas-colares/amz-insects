@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>FI10A02-A_2.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/FI10A02-A_2.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>322</width>
+  <height>316</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Isoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>222</xmax>
+   <ymax>216</ymax>
+  </bndbox>
+ </object>
+</annotation>

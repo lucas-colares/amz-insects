@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>FI24A04-A_6.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/FI24A04-A_6.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>423</width>
+  <height>380</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Coleoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>179</xmin>
+   <ymin>100</ymin>
+   <xmax>323</xmax>
+   <ymax>280</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Coleoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>234</ymin>
+   <xmax>146</xmax>
+   <ymax>259</ymax>
+  </bndbox>
+ </object>
+</annotation>

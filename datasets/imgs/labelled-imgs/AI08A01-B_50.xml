@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>AI08A01-B_50.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/AI08A01-B_50.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>354</width>
+  <height>416</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Nematocera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>200</xmin>
+   <ymin>100</ymin>
+   <xmax>254</xmax>
+   <ymax>159</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Coleoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>153</ymin>
+   <xmax>243</xmax>
+   <ymax>316</ymax>
+  </bndbox>
+ </object>
+</annotation>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Pieces_Jan23</folder>
+ <filename>AI30A01-B_25.jpg</filename>
+ <path>D:\Luke Files\Ciencia\Produção Científica\PhD Thesis\Exp. 01 - Trap Photos\04. Finais Anotadas\For training\Pieces_Jan23\AI30A01-B_25.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>495</width>
+  <height>512</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Araneae</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>228</xmin>
+   <ymin>130</ymin>
+   <xmax>399</xmax>
+   <ymax>280</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Ephemeroptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>71</xmin>
+   <ymin>342</ymin>
+   <xmax>162</xmax>
+   <ymax>412</ymax>
+  </bndbox>
+ </object>
+</annotation>

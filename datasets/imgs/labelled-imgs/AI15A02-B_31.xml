@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>AI15A02-B_31.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/AI15A02-B_31.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>538</width>
+  <height>389</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Ephemeroptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>273</xmax>
+   <ymax>259</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Ephemeroptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>355</xmin>
+   <ymin>156</ymin>
+   <xmax>438</xmax>
+   <ymax>289</ymax>
+  </bndbox>
+ </object>
+</annotation>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Pieces_Jan23</folder>
+ <filename>AI32A01-B_15.jpg</filename>
+ <path>D:\Luke Files\Ciencia\Produção Científica\PhD Thesis\Exp. 01 - Trap Photos\04. Finais Anotadas\For training\Pieces_Jan23\AI32A01-B_15.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>235</width>
+  <height>248</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Araneae</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>99</xmin>
+   <ymin>109</ymin>
+   <xmax>135</xmax>
+   <ymax>148</ymax>
+  </bndbox>
+ </object>
+</annotation>

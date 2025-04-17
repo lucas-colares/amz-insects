@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Pieces_Jan23</folder>
+ <filename>TF02A03-B_19.jpg</filename>
+ <path>D:\Luke Files\Ciencia\Produção Científica\PhD Thesis\Exp. 01 - Trap Photos\04. Finais Anotadas\For training\Pieces_Jan23\TF02A03-B_19.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>293</width>
+  <height>282</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Coleoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>135</xmin>
+   <ymin>106</ymin>
+   <xmax>184</xmax>
+   <ymax>145</ymax>
+  </bndbox>
+ </object>
+</annotation>

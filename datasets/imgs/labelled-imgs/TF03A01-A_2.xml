@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>TF03A01-A_2.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/TF03A01-A_2.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>481</width>
+  <height>312</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Coleoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>340</xmin>
+   <ymin>100</ymin>
+   <xmax>381</xmax>
+   <ymax>134</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Hemiptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>171</ymin>
+   <xmax>121</xmax>
+   <ymax>212</ymax>
+  </bndbox>
+ </object>
+</annotation>

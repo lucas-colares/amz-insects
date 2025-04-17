@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>AI03A03-A_36.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/AI03A03-A_36.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>526</width>
+  <height>312</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Nematocera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>148</xmax>
+   <ymax>167</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Nematocera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>402</xmin>
+   <ymin>165</ymin>
+   <xmax>426</xmax>
+   <ymax>199</ymax>
+  </bndbox>
+ </object>
+</annotation>

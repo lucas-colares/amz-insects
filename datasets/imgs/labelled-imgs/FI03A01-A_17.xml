@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Pieces_Jan23</folder>
+ <filename>FI03A01-A_17.jpg</filename>
+ <path>D:\Luke Files\Ciencia\Produção Científica\PhD Thesis\Exp. 01 - Trap Photos\04. Finais Anotadas\For training\Pieces_Jan23\FI03A01-A_17.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>800</width>
+  <height>344</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Odonata</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>700</xmax>
+   <ymax>244</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Hemiptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>30</xmin>
+   <ymin>174</ymin>
+   <xmax>48</xmax>
+   <ymax>210</ymax>
+  </bndbox>
+ </object>
+</annotation>

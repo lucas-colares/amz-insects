@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<annotation>
+  <folder>datasets/imgs/new-annotated/</folder>
+  <filename>FI28A03-A_2.jpg</filename>
+  <path>datasets/imgs/new-annotated/FI28A03-A_2.jpg</path>
+  <source>
+    <database>Unknown</database>
+  </source>
+  <size>
+    <width>328</width>
+    <height>363</height>
+    <depth>3</depth>
+  </size>
+  <segmented>0</segmented>
+  <object>
+    <name>Homoptera</name>
+    <pose>Unspecified</pose>
+    <truncated>0</truncated>
+    <difficult>0</difficult>
+    <bndbox>
+      <xmin>110</xmin>
+      <ymin>108</ymin>
+      <xmax>228</xmax>
+      <ymax>254</ymax>
+    </bndbox>
+  </object>
+</annotation>

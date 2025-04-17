@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>TF02A07-A_32.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/TF02A07-A_32.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>497</width>
+  <height>565</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Lepidoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>355</xmax>
+   <ymax>307</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Lepidoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>113</xmin>
+   <ymin>316</ymin>
+   <xmax>397</xmax>
+   <ymax>465</ymax>
+  </bndbox>
+ </object>
+</annotation>

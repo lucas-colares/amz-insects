@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<annotation>
+ <folder>Normal</folder>
+ <filename>MI03A00-B_19.jpg</filename>
+ <path>~/Balbina_TrapPhotos_Exp1/For training/MI03A00-B_19.jpg</path>
+ <source>
+  <database>Unknown</database>
+ </source>
+ <size>
+  <width>467</width>
+  <height>434</height>
+  <depth>3</depth>
+ </size>
+ <segmented>0</segmented>
+ <object>
+  <name>Orthoptera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>100</xmin>
+   <ymin>100</ymin>
+   <xmax>344</xmax>
+   <ymax>334</ymax>
+  </bndbox>
+ </object>
+ <object>
+  <name>Nematocera</name>
+  <pose>Unspecified</pose>
+  <truncated>0</truncated>
+  <difficult>0</difficult>
+  <bndbox>
+   <xmin>323</xmin>
+   <ymin>171</ymin>
+   <xmax>367</xmax>
+   <ymax>226</ymax>
+  </bndbox>
+ </object>
+</annotation>
