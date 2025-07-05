@@ -4,7 +4,7 @@
 source("scripts/00. setup.R")
 
 read.csv("datasets/csv/matrix of insects.csv",h=T,row.names = 1)->insects
-read.csv("datasets/csv/landscape metric.csv",h=T,row.names = 1)->land
+read.csv("datasets/csv/landscape metrics - jul25.csv",h=T,row.names = 1)->land
 land = land[match(unique(insects$trap)[order(unique(insects$trap))],land$Trap),]
 
 ##### 1. Calculate richness, abundance and composition ----
@@ -45,20 +45,20 @@ full_data$N_effect = full_data$ENS_N-full_data$ENS_n
 
 ##### 2. Scale of effect ----
 ##### 2.1. Richness' SoE ----
-c(100,250,500,750,1000,1500,2000,2500,3000)->scales
+c(seq(100,900,50),seq(1000,1500,100))->scales
 
 GAM_S_res=pblapply(scales,function(x){
   gam_data<-data.frame(full_data,Area=land_fil[,paste0("Area",sprintf("%04d",x))])
   
   AICs<-lapply(1:20,function(y){
-    gam(SAD_effect~Area*hab+s(Long, Lat,k=y),family = "gaussian",data = gam_data)->GAM_S1
-    gam(N_effect~Area*hab+s(Long, Lat,k=y),family = "gaussian",data = gam_data)->GAM_S2
+    gam(SAD_effect~Area+Area:hab+s(Long, Lat,k=y),family = "gaussian",data = gam_data)->GAM_S1
+    gam(N_effect~Area+Area:hab+s(Long, Lat,k=y),family = "gaussian",data = gam_data)->GAM_S2
     return(data.frame(SAD=AIC(GAM_S1),N=AIC(GAM_S2),k=y))
   })
   do.call("rbind",AICs)->k_data
   k_data[order(k_data$SAD),][1,]$k->temp_k
-  gam(SAD_effect~Area*hab+s(Long, Lat,k=temp_k),family = "gaussian",data = gam_data)->GAM_S1
-  gam(N_effect~Area*hab+s(Long, Lat,k=temp_k),family = "gaussian",data = gam_data)->GAM_S2
+  gam(SAD_effect~Area+Area:hab+s(Long, Lat,k=temp_k),family = "gaussian",data = gam_data)->GAM_S1
+  gam(N_effect~Area+Area:hab+s(Long, Lat,k=temp_k),family = "gaussian",data = gam_data)->GAM_S2
   summary(GAM_S1)
   summary(GAM_S2)
   dist(gam_data[,c("Lat","Long")])->distzzz1
@@ -80,11 +80,16 @@ GAM_S_res=pblapply(scales,function(x){
 })
 do.call("rbind",lapply(GAM_S_res,"[[",1))->moran_S
 do.call("rbind",lapply(GAM_S_res,"[[",2))->SoE_S
-add_significance(SoE_S,p.col="P",cutpoints = c(0, 1e-04, 0.001, 0.01, 0.05, 0.1,1),
+p.adjust(SoE_S[SoE_S$component=="SAD",]$P,method = "bonferroni",n = length(SoE_S[SoE_S$component=="SAD",]$P))->SAD_P
+p.adjust(SoE_S[SoE_S$component=="N",]$P,method = "bonferroni",n = length(SoE_S[SoE_S$component=="N",]$P))->N_P
+SoE_S$adj_P<-NA
+SoE_S[SoE_S$component=="SAD",]$adj_P<-SAD_P
+SoE_S[SoE_S$component=="N",]$adj_P<-N_P
+add_significance(SoE_S,p.col="adj_P",cutpoints = c(0, 1e-04, 0.001, 0.01, 0.05, 0.1,1),
                  symbols = c("****", "***", "**", "*", ".","ns"))->SoE_S
 
-SoE_S[SoE_S$component=="SAD",][order(SoE_S[SoE_S$component=="SAD",]$R2,decreasing = T),][1:5,]
-SoE_S[SoE_S$component=="N",][order(SoE_S[SoE_S$component=="N",]$R2,decreasing = T),][1:5,]
+SoE_S[SoE_S$component=="SAD",][order(SoE_S[SoE_S$component=="SAD",]$R2,decreasing = T),][1:4,]
+SoE_S[SoE_S$component=="N",][order(SoE_S[SoE_S$component=="N",]$R2,decreasing = T),][1:4,]
 
 SoE_S[SoE_S$component=="SAD",][order(SoE_S[SoE_S$component=="SAD",]$R2,decreasing = T),][1:5,]$scale->sel_SAD
 SoE_S[SoE_S$component=="N",][order(SoE_S[SoE_S$component=="N",]$R2,decreasing = T),][1:5,]->sel_N
@@ -139,8 +144,8 @@ ScaEffN<-ggplot()+
   theme(legend.justification = "top",strip.text = element_text(size=12,family="sans",face = "bold",hjust = 0,vjust = 0),strip.background = element_rect(fill="transparent",color="transparent"), legend.text.align = 0,legend.title.align=0,legend.position = "right", legend.background = element_rect(fill="NA", colour = "NA"), legend.title = element_text(face="bold", family = "sans", colour = "black", size=12), legend.text = element_text(family ="sans", size=10), axis.text = element_text(family = "sans", colour = "black", size=12), axis.title = element_text(face="bold",family = "sans", size = 14));ScaEffN
 
 SADPlt<-ggplot()+
-  geom_point(data=full_data,aes(x=land_fil$Area0750,y=log10(SAD_effect),color=hab))+
-  geom_smooth(data=full_data,aes(x=land_fil$Area0750,y=log10(SAD_effect),color=hab),method="glm",method.args=list(family="quasipoisson"))+
+  geom_point(data=full_data,aes(x=land_fil$Area0100,y=log10(SAD_effect),color=hab))+
+  geom_smooth(data=full_data,aes(x=land_fil$Area0100,y=log10(SAD_effect),color=hab),method="glm",method.args=list(family="quasipoisson"))+
   facet_wrap(.~"(a) SAD-component:")+
   scale_color_manual(values=c("#1f96c4","#20684a"),labels=c("Aquatic","Terrestrial"))+
   theme_minimal()+
@@ -207,44 +212,6 @@ betaC_plt<-ggplot(data = final_box[final_box$var=="abun",],mapping = aes(x=group
   guides(fill="none",color="none")+
   labs(x="Life cycle",y="β-diversity",color="Life cycle")+
   theme(legend.justification = "top",strip.text = element_text(size=12,family="sans",face = "bold",hjust = 0,vjust = 0.5),strip.background = element_rect(fill="transparent",color="transparent"), legend.text.align = 0,legend.title.align=0,legend.position = "none", legend.background = element_rect(fill="NA", colour = "NA"), legend.title = element_text(face="bold", family = "sans", colour = "black", size=12), legend.text = element_text(family ="sans", size=10), axis.text = element_text(family = "sans", colour = "black", size=12), axis.title = element_text(face="bold",family = "sans", size = 14));betaC_plt
-
-# Cs1 = lapply(c("F","A|^M","TF"),function(x){
-#   Cs2 = lapply(c("T","A"), function(y){
-#     sel_hab = ins_mat[rowSums(ins_mat[,habs$hab==y])>0,habs$hab==y]
-#     sel_hab = sel_hab[grepl(paste0("^",x),rownames(sel_hab)),]
-#     c_targ<-min(beta_stand(sel_hab, setsize = 20, list("C_target"),summarise = F,resamples = 9999))
-#     return(c_targ)
-#   })
-#   return(unlist(Cs2))
-# })
-# 
-# C_stand<-round(min(unlist(Cs1))-0.01,2)
-# 
-# betaC1 = lapply(c("F","A|^M","TF"),function(x){
-#   betaC2 = lapply(c("T","A"), function(y){
-#     sel_hab = ins_mat[rowSums(ins_mat[,habs$hab==y])>0,habs$hab==y]
-#     sel_hab = sel_hab[grepl(paste0("^",x),rownames(sel_hab)),]
-#     T_betaC<-beta_stand(sel_hab, setsize = 20, list("beta_C"),args = list(C= C_stand),summarise = F,resamples = 9999)
-#     T_betaW<-beta_stand(sel_hab, setsize = 20, list("beta_true"),summarise = F,resamples = 9999)
-#     return(data.frame(betaC=T_betaC,betaW=T_betaW,life=y,area=x))
-#   })
-#   return(do.call("rbind",betaC2))
-# })
-# do.call("rbind",betaC1)->betaC_est
-# betaC_est<-melt(betaC_est)
-# 
-# betaC_plt2<-ggplot(data = betaC_est,mapping = aes(x=area,y=value))+
-#   geom_violin(mapping = aes(color=life,fill=life),trim = F,width=1.5)+
-#   stat_summary(fun.data=mean_ci, mult=1,geom="pointrange",color="white")+
-#   facet_wrap(.~variable)+
-#   scale_color_manual(values=c("#1f96c4","#20684a"))+
-#   scale_fill_manual(values=c("#1f96c4","#20684a"))+
-#   #scale_x_discrete(labels=c("Aquatic","Terrestrial"))+
-#   #stat_pvalue_manual(stat.test, label = "p.adj.signif",hide.ns = T)+ 
-#   theme_minimal()+
-#   guides(fill="none",color="none")+
-#   labs(x="Life cycle",y="β-diversity",color="Life cycle")+
-#   theme(legend.justification = "top",strip.text = element_text(size=12,family="sans",face = "bold",hjust = 0,vjust = 0.5),strip.background = element_rect(fill="transparent",color="transparent"), legend.text.align = 0,legend.title.align=0,legend.position = "none", legend.background = element_rect(fill="NA", colour = "NA"), legend.title = element_text(face="bold", family = "sans", colour = "black", size=12), legend.text = element_text(family ="sans", size=10), axis.text = element_text(family = "sans", colour = "black", size=12), axis.title = element_text(face="bold",family = "sans", size = 14));betaC_plt2
 
 ##### 2.2.2. PCoA Axis
 cmdscale(d,k=2,eig = T,add=T)->pcoa2
@@ -518,7 +485,8 @@ GAM_taxa_size=pblapply(scales,function(x){
 })
 do.call("rbind",lapply(GAM_taxa_size,"[[",1))->moran_size
 do.call("rbind",lapply(GAM_taxa_size,"[[",2))->SoE_size
-add_significance(SoE_size,p.col="P",cutpoints = c(0, 1e-04, 0.001, 0.01, 0.05, 0.1,1),
+p.adjust(SoE_size$P,method="bonferroni",n=nrow(SoE_size))->SoE_size$P_adj
+add_significance(SoE_size,p.col="P_adj",cutpoints = c(0, 1e-04, 0.001, 0.01, 0.05, 0.1,1),
                  symbols = c("****", "***", "**", "*", ".","ns"))->SoE_size
 
 area_coefs_size_ord = SoE_size[grepl("Area",rownames(SoE_size)),]
@@ -562,9 +530,9 @@ ScaEffOrd_size<-ggplot()+
   theme_minimal()+
   scale_size_continuous(labels=c("Min","Mid-low","Mid","Mid-high","Max"),breaks = seq(min(area_coefs_size_ord$R2),max(area_coefs_size_ord$R2),length.out=5),limits = c(min(area_coefs_size_ord$R2),max(area_coefs_size_ord$R2)))+
   guides(size=guide_legend(order = 2),color=guide_legend(order = 1),fill=guide_legend(order = 1),shape=guide_legend(order = 1))+
-  scale_color_manual(values=my_cols,labels=fantasy_names)+
-  scale_fill_manual(values=my_cols,labels=fantasy_names)+
-  scale_shape_manual(values=c(21,22,23,24,25,8,13),labels=fantasy_names)+
+  scale_color_manual(values=my_cols)+
+  scale_fill_manual(values=my_cols)+
+  scale_shape_manual(values=c(21,22,23,24,25,8,13))+
   labs(x="Spatial scale (m)",y="Effect size",size="Adj-R²",fill="Taxa",color="Taxa",shape="Taxa")+
   theme(legend.justification = "top",strip.text = element_text(size=12,family="sans",face = "bold",hjust = 0,vjust = 0.5),strip.background = element_rect(fill="transparent",color="transparent"), legend.text.align = 0,legend.title.align=0,legend.position = "right", legend.background = element_rect(fill="NA", colour = "NA"), legend.title = element_text(face="bold", family = "sans", colour = "black", size=12), legend.text = element_text(family ="sans", size=10), axis.text = element_text(family = "sans", colour = "black", size=12), axis.title = element_text(face="bold",family = "sans", size = 14));ScaEffOrd_size
 
@@ -617,3 +585,73 @@ ggsave(filename = "figures/SAD+N.tif",plot = arr5,units = "in",width = 8.5,heigh
 
 arr6 = ggarrange(CompPlt2,CompPlt1,betaC_plt,ScaEffComp,nrow = 2,ncol = 2,heights = c(1,0.85),align = "h");arr6
 ggsave(filename = "figures/composition_plot.tif",plot = arr6,units = "in",width = 11.75,height = 7.5,dpi = 600)
+
+##### Supporting figures ----
+dir("model_training/runs/",pattern = "^train",full.names = T) -> mod_files
+lapply(paste0(mod_files,"/results.csv"),read.csv,h=T)->mod_res
+for(x in 1:length(mod_res)){
+  mod_res[[x]]$fold<-x
+}
+do.call("rbind",mod_res)->mod_res
+melt(mod_res,id.vars = c("epoch","fold"))->mod_res
+mod_res = mod_res[mod_res$variable!="time",]
+mod_res = mod_res[mod_res$variable!="lr.pg1",]
+mod_res = mod_res[mod_res$variable!="lr.pg2",]
+facet_labs=c("Train: box loss","Train: class. loss","Train: dfl. loss","Train: box precision","Train: recall","Train: mAP (@0.5 IoU)","Train: mAP (@0.95 IoU)","Val.: box loss","Val.: class. loss","Val.: dfl. loss","Learning rate")
+names(facet_labs) = unique(mod_res$variable) 
+metrics_plt = ggplot(data = mod_res,mapping = aes(x=epoch,y=value))+
+  geom_line(aes(group=factor(fold),color=factor(fold),alpha=factor(fold)))+
+  geom_smooth(color="black",se=F,method = "loess")+
+  facet_wrap(.~variable,scales = "free_y",labeller = labeller(variable = facet_labs))+
+  theme_minimal()+
+  scale_x_continuous(limits = c(0,250))+
+  scale_alpha_manual(values=c(rep(0.5,5)),labels=c("1","2","3","4","5"),name="Fold")+
+  scale_color_manual(values=c("#BB3E00","#F7AD45","#657C6A","#A2B9A7","#547792"),labels=c("1","2","3","4","5"),name="Fold")+
+  labs(y="Value",x="Epoch")+
+  theme(legend.justification = "top",strip.text = element_text(size=12,family="sans",face = "bold",hjust = 0,vjust = 0.5),strip.background = element_rect(fill="transparent",color="transparent"), legend.text.align = 1,legend.title.align=1,legend.position = "right", legend.background = element_rect(fill="NA", colour = "NA"), legend.title = element_text(face="bold", family = "sans", colour = "black", size=12), legend.text = element_text(family ="sans", size=10), axis.text = element_text(family = "sans", colour = "black", size=12), axis.title = element_text(face="bold",family = "sans", size = 14));metrics_plt
+ggsave(filename = "figures/metrics_plot.tif",plot = metrics_plt,units = "in",width = 12.5,height = 7.5,dpi = 600)
+
+aggregate(mod_res[mod_res$epoch==250,]$value,list(mod_res[mod_res$epoch==250,]$variable),mean)->mod_res_agg
+aggregate(mod_res[mod_res$epoch==250,]$value,list(mod_res[mod_res$epoch==250,]$variable),sd)->mod_res_agg_sd
+
+### Arrange Moran's Table
+
+TableS2 = data.frame(Group=c(rep("Lifecycle",nrow(moran_S)+nrow(moran_Comp)),as.character(moran_taxa$taxa),as.character(moran_size$taxa)),
+           Observed=c(moran_S$observed,moran_Comp$observed,moran_taxa$observed,moran_size$observed),
+           Expected=c(moran_S$expected,moran_Comp$expected,moran_taxa$expected,moran_size$expected),
+           SD=c(moran_S$sd,moran_Comp$sd,moran_taxa$sd,moran_size$sd),
+           P=c(moran_S$p,moran_Comp$p,moran_taxa$p,moran_size$p),
+           Scale=c(moran_S$scale,moran_Comp$scale,moran_taxa$scale,moran_size$scale),
+           Response=c(moran_S$component,moran_Comp$data,rep("Abundance",nrow(moran_taxa)),rep("Body size",nrow(moran_size))))
+TableS2[order(TableS2$Response),]->TableS2
+write.csv(TableS2,"results/TableS2.csv")
+
+gsub("habT","Life cycle",SoE_S$var)->SoE_S$var
+TableS3 = data.frame(Response=c(paste0(SoE_S$component,"-component"),paste0(SoE_Comp$data,"-based composition")),
+                     "Effect type"=c(SoE_S$eff,SoE_Comp$eff),
+                     Explanatory=c(SoE_S$var,SoE_Comp$var),
+                     Estimate=c(SoE_S$Estimate,SoE_Comp$Estimate),
+                     Statistics=c(SoE_S$stat,SoE_Comp$stat),
+                     K=c(SoE_S$k,SoE_Comp$k),
+                     P=c(SoE_S$P,SoE_Comp$P),
+                     Signif=c(SoE_S$P.signif,SoE_Comp$P.signif),
+                     R2=c(SoE_S$R2,SoE_Comp$R2),
+                     AIC=c(SoE_S$AIC,SoE_Comp$AIC),
+                     Scale=c(SoE_S$scale,SoE_Comp$scale))
+TableS3
+write.csv(TableS3,"results/TableS3.csv")
+
+TableS4 = data.frame(Response=c(rep("Abundance",nrow(SoE_taxa)),rep("Body size",nrow(SoE_size))),
+                     Taxon=c(SoE_taxa$taxa,SoE_size$taxa),
+                     "Effect type"=c(SoE_taxa$eff,SoE_size$eff),
+                     Explanatory=c(SoE_taxa$var,SoE_size$var),
+                     Estimate=c(SoE_taxa$Estimate,SoE_size$Estimate),
+                     Statistics=c(SoE_taxa$stat,SoE_size$stat),
+                     K=c(SoE_taxa$k,SoE_size$k),
+                     P=c(SoE_taxa$P,SoE_size$P),
+                     Signif=c(SoE_taxa$P.signif,SoE_size$P.signif),
+                     R2=c(SoE_taxa$R2,SoE_size$R2),
+                     AIC=c(SoE_taxa$AIC,SoE_size$AIC),
+                     Scale=c(SoE_taxa$scale,SoE_size$scale))
+TableS4
+write.csv(TableS4,"results/TableS4.csv")

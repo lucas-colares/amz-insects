@@ -225,6 +225,17 @@ bestThresh<-lapply(unique(all_metrics_fold$fold), function(x){
 do.call("rbind",bestThresh)->bestThresh
 bestThresh = bestThresh[bestThresh$group!="All groups",]
 
+bestThreshF1<-lapply(unique(all_metrics_fold$fold), function(x){
+  group_best<-lapply(unique(all_metrics_fold$group), function(y){
+    sels<-all_metrics_fold[(all_metrics_fold$fold==x)&(all_metrics_fold$group==y),]
+    return(sels[order(sels$F1,decreasing = T),][1,])
+  })
+  return(do.call("rbind",group_best))
+})
+do.call("rbind",bestThreshF1)->bestThreshF1
+write.csv(bestThreshF1,"results/metrics_at_F1.csv")
+mean(bestThreshF1[bestThreshF1$group=="All groups",]$precision)
+
 ##### 1.2. Apply best threshold to each group and fold ----
 final_mat = {}
 for (x in unique(detc$fold)) {
@@ -276,7 +287,7 @@ coords = st_as_sf(coords,coords = c("Long","Lat"),crs = 4326)
 coords_t = st_transform(coords,crs = "+proj=utm +zone=21 +south +ellps=GRS80 +units=m +no_defs")
 
 download.file("https://storage.googleapis.com/mapbiomas-public/initiatives/brasil/collection_9/lclu/coverage/brasil_coverage_2021.tif",destfile = "datasets/spatial/brasil_coverage_2021.tif")
-c(100,250,500,750,1000,1500,2000,2500,3000)->buf_sizes
+c(seq(100,1000,50),seq(1100,10000,100))->buf_sizes
 
 raster("datasets/spatial/brasil_coverage_2021.tif")->mapbiomas
 crop(mapbiomas,st_buffer(coords,5000))->map_cropped
@@ -285,13 +296,16 @@ projectRaster(map_cropped,crs = "+proj=utm +zone=21 +south +ellps=GRS80 +units=m
 lsm_c_ca(map_cropped)->all_classes
 all_classes<-data.frame(class=all_classes$class,cat=c("NA","land","land","land","land","land","water","land"))
 
+snow::makeCluster(4)->cl
+snow::clusterExport(cl,list(c("map_cropped","all_classes")))
 final_area<-lapply(buf_sizes,function(x){
   st_buffer(coords_t,x)->bufs
+  snow::clusterExport(cl,list("bufs"))
   print(paste0(x," meters:"))
-  areaz<-pblapply(1:nrow(bufs),function(y){
-    crop(map_cropped,bufs[y,])->map_buf
-    mask(map_buf,bufs[y,])->map_buf
-    lsm_c_ca(map_buf)->class_area
+  areaz<-pblapply(cl = cl,1:nrow(bufs),function(y){
+    raster::crop(map_cropped,raster::extent(bufs[y,]))->map_buf
+    raster::mask(map_buf,bufs[y,])->map_buf
+    landscapemetrics::lsm_c_ca(map_buf)->class_area
     class_area$value<-class_area$value/sum(class_area$value)
     return(sum(class_area[na.omit(match(all_classes$class[all_classes$cat=="land"],class_area$class)),]$value))
   })
@@ -302,4 +316,4 @@ final_area<-lapply(buf_sizes,function(x){
 do.call("cbind",final_area)->final_area
 colnames(final_area)=paste0("Area",colnames(final_area))
 final_area = data.frame(Trap=coords$Trap,st_coordinates(coords),final_area)
-write.csv(final_area,"datasets/csv/landscape metric.csv")
+write.csv(final_area,"datasets/csv/landscape metrics - jul25.csv")
