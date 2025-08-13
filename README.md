@@ -158,7 +158,7 @@ Packages used: `mgcv`, `vegan`, `betapart`, `iNEXT`, `ggplot2`, `picante`
 
 If using this repository, please cite:
 
-> **Colares, L.F.**, et al. (2025). *Life history induces markedly divergent insect responses to habitat loss*. Journal of Animal Ecology. [https://doi.org/10.5281/zenodo.15238078](https://doi.org/10.5281/zenodo.15238078)
+> **Colares, L.F.**, et al. (2025). *Life history induces markedly divergent insect responses to habitat loss*. Journal of Animal Ecology. [https://doi.org/10.1111/1365-2656.70117](https://doi.org/10.1111/1365-2656.70117)
 
 Also cite the **Figshare DOIs** if using the models or datasets directly.
 
